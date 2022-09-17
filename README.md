@@ -21,7 +21,58 @@ https://drive.google.com/drive/folders/1WTnmnm6wMBOO2kNQbf5k3FHDkrtFZsWe?usp=sha
 ## Features of my game
 
 ### 1.Camera following when moving the board.
-You 
+Before the game start, you will need a broad view of all the 3 panels for choosing where to set your gameboard. Upon the game begin, you need to zoom in on the camera for a better gaming experience. So I code this camera following script. After you have already placed the game board, camera will zoom in. Otherwise if you are placing the game board, camera will zoom out to the original position. This script also coordinates with the camera shake script.  
+```C++
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ARFollowTarget : MonoBehaviour
+{
+    // follow parameter 
+    public float distanceAway = 10;           
+    public float distanceUp = 2;             
+    public float smooth = 3; 
+
+    public GameObject gameBoard;
+    Transform follow;
+
+    // store the original position
+    private Vector3 targetPosition, originalPosition;
+    private Quaternion originalRotation;
+
+    public bool placed = true;
+
+    void Start()
+    {
+        follow = gameBoard.transform;
+        originalPosition = this.transform.localPosition;
+        originalRotation = this.transform.localRotation;
+    }
+
+    void Update()
+    {
+        // follow the board
+        if (gameBoard.active && placed)
+        {
+            targetPosition = follow.position + Vector3.up * distanceUp - follow.forward * distanceAway;
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * smooth);
+            transform.LookAt(follow);
+        }      
+        // back to the original position
+        else if (gameBoard.active && !placed)
+        {
+            transform.position = Vector3.Lerp(transform.position, originalPosition, Time.deltaTime * smooth);
+            transform.rotation = Quaternion.Lerp(transform.rotation, originalRotation, Time.deltaTime * smooth);
+        }
+    }
+
+    public void moveBoard( )
+    {
+        placed = false;
+
+    }
+}
 
 ![camera follow.png](https://github.com/Nianthony/cs294-137-hw2-tongnian/blob/aa22f7a0d2560ee0a0b4c70ac0738ce961985e67/image/camera%20follow.png)
 
