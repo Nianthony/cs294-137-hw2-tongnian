@@ -23,7 +23,7 @@ https://drive.google.com/drive/folders/1WTnmnm6wMBOO2kNQbf5k3FHDkrtFZsWe?usp=sha
 ### 1.Camera following when moving the board.
 You 
 
-![camera follow.png](image/camera follow.png)
+![camera follow.png]([image/camera follow.png](https://github.com/Nianthony/cs294-137-hw2-tongnian/blob/aa22f7a0d2560ee0a0b4c70ac0738ce961985e67/image/camera%20follow.png))
 
 
 ### 2.OnTouch function for determine the state of mole
