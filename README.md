@@ -74,6 +74,8 @@ public class ARFollowTarget : MonoBehaviour
     }
 }
 
+```
+
 ![camera follow.png](https://github.com/Nianthony/cs294-137-hw2-tongnian/blob/aa22f7a0d2560ee0a0b4c70ac0738ce961985e67/image/camera%20follow.png)
 
 
