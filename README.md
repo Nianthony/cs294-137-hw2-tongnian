@@ -29,8 +29,12 @@ You
 ### 2.OnTouch function for determine the state of mole
 You 
 
+![on touch.png](https://github.com/Nianthony/cs294-137-hw2-tongnian/blob/aaa7357f924389e5427a1fd806bcf78782585799/image/on%20touch.png)
+
+
 
 ### 3.Camera shaking when the hammer hitting the mole
 You 
 
+![camera shake.png](https://github.com/Nianthony/cs294-137-hw2-tongnian/blob/aaa7357f924389e5427a1fd806bcf78782585799/image/camera%20shake.png)
 
