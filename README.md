@@ -11,7 +11,7 @@ https://assetstore.unity.com/packages/templates/whack-a-mole-82155
 I used the prefabs (moles, trees and stones), font, audio and part of the animation to set up my unity scene. I took part of the codes in the template as my reference or tutorial for coding my own part. I rewriting the judgement condition in the game mechanism for it works different in the ARsimulation environment becuase those Raycast funtion cannot be simply implement in the simulation environment.
 
 
-### Link
+## Link
 
 I used the .gitignore file and tried to push my unity files to my repo. But I got lot of troubles in the process, like the name of my files are too long and there are lot of .meta fils doesn't include in the .gitignore template. I consdier it would be very inconvenient to view the incomplete unity engineering documents. So I export the unity package and put it in my google drive link. The video is also in my google drive.
 
