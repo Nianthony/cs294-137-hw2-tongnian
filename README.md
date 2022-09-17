@@ -22,6 +22,7 @@ https://drive.google.com/drive/folders/1WTnmnm6wMBOO2kNQbf5k3FHDkrtFZsWe?usp=sha
 
 ### 1.Camera following when moving the board.
 You 
+![camera follow.PNG](/image/camera follow.PNG)
 
 
 ### 2.OnTouch function for determine the state of mole
