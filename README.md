@@ -191,7 +191,38 @@ public class MoleController : MonoBehaviour, OnTouch3D
 
 
 ### 3.Camera shaking when the hammer hitting the mole
-You 
+To improve the immersive game experiences, I adde the prefab of explosion in my reference asset to the scripts. When hammer hit the mole, it will trigger the animation of explosion. At the same time, the camera will make a quick offset to simulate the effect of vibration on your perspective.
+```C++
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraShaker : MonoBehaviour {
+
+	Vector3 defaultPos;
+	public float MAGNITUDE = 0.1f;
+
+	public void Shake()
+	{		
+		StartCoroutine (Shake_Resilience());
+	}
+
+	IEnumerator Shake_Resilience()
+	{
+		for (int i = 0; i <= 360; i += 45) 
+		{
+			transform.position = new Vector3 (defaultPos.x, defaultPos.y + MAGNITUDE*Mathf.Sin (i * Mathf.Deg2Rad), defaultPos.z);
+			yield return null;
+		}
+	}
+
+	public void defaultPosition()
+    {
+		defaultPos = transform.position;
+	}
+}
+
+```
 
 ![camera shake.png](https://github.com/Nianthony/cs294-137-hw2-tongnian/blob/aaa7357f924389e5427a1fd806bcf78782585799/image/camera%20shake.png)
 
