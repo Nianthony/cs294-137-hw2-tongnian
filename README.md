@@ -80,7 +80,111 @@ public class ARFollowTarget : MonoBehaviour
 
 
 ### 2.OnTouch function for determine the state of mole
-You 
+As the original Unity functions works different in the simulation environment. Instead of determining whether the collidor volumes of the moles and hammer collide, I choose the onTouch function to determine whether your mouse click the right mole in time. If the mole is clicked by your mouse, then the hammer will move directly over the mole and finish rapid vertical fall and ascent in 0.25 seconds. Meanwhile, score will add. 
+```C++
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MoleController : MonoBehaviour, OnTouch3D
+{
+
+	private float moveSpeed = 0.1f;
+	private float waitTime = 1.0f;
+
+	private float TOP = 0.44f;
+	private float BOTTOM = 0.35f;
+	private float tmpTime = 0;
+
+	enum State
+	{
+		UNDER_GROUND,
+		UP,
+		ON_GROUND,
+		DOWN,
+		HIT,
+	}
+	State state;
+
+	public void OnTouch()
+	{
+		bool isHit = Hit();
+		// if hit the mole, score, hummer and effect
+        if (isHit)
+        {
+			Debug.Log("Hit U: " + gameObject.transform.position);
+			/*GameObject hummer = GameObject.Find("Hummer");
+			hummer.GetComponent<HummerController>().hitPosition = gameObject.transform.position;
+			hummer.GetComponent<HummerController>().hit = true;*/
+			HummerController.hitPosition = gameObject.transform.position;
+			HummerController.hit = true;
+		}
+    }
+
+	//connect with mole controller
+	public void Up()
+	{
+		gameObject.SetActive(true);
+		if (state == State.UNDER_GROUND)
+			state = State.UP;
+	}
+
+	public bool Hit()
+	{
+		// if mole is under ground, never hit
+		if (state == State.UNDER_GROUND)
+			return false;
+
+		// hit to bottom
+		transform.position = new Vector3(transform.position.x, BOTTOM, transform.position.z);
+		state = State.UNDER_GROUND;
+		return true;
+	}
+
+	void Start()
+	{
+		// all set to the bottom
+		state = State.UNDER_GROUND;
+	}
+
+	void Update()
+	{
+		// show up
+		if (state == State.UP)
+		{
+			transform.Translate(0, moveSpeed, 0);
+			if (transform.position.y > TOP)
+			{
+				transform.position = new Vector3(transform.position.x, TOP, transform.position.z);
+				state = State.ON_GROUND;
+				tmpTime = 0;
+			}
+		}
+
+		// based on time to determine go bottom or not
+		else if (state == State.ON_GROUND)
+		{
+			tmpTime += Time.deltaTime;
+			if (tmpTime > waitTime)
+				state = State.DOWN;
+		}
+
+		// go bottom
+		else if (state == State.DOWN)
+		{
+			transform.Translate(0, -moveSpeed, 0);
+			if (transform.position.y < BOTTOM)
+			{
+				transform.position = new Vector3(transform.position.x, BOTTOM, transform.position.z);
+				state = State.UNDER_GROUND;
+				gameObject.SetActive(false);
+			}
+		}
+	}
+
+}
+
+```
 
 ![on touch.png](https://github.com/Nianthony/cs294-137-hw2-tongnian/blob/aaa7357f924389e5427a1fd806bcf78782585799/image/on%20touch.png)
 
